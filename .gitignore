@@ -3,5 +3,4 @@
 CMakeListsPrivate.txt
 cmake-build-debug
 .travis.yml
-/lib/
 .idea/
