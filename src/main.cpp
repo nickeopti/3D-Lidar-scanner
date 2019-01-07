@@ -43,23 +43,18 @@ void step(void) {
 uint32_t pos = 10;
 bool up = true;
 void loop() {
-    /*
+
     while (digitalRead(HALL_SENSOR)) {
         step();
-        delay(10);
-    }*/
+        delay(25);
+    }
 
-    for (uint32_t i = 0; i < 200; i++) {
+    for (uint32_t i = 0; i < 400; i++) {
         step();
 
         uint16_t distance = lidar.getDistance();
-
-        ice.write(2*i*pos, (uint8_t) (distance >> 8));
-        delay(2);
-        ice.write(2*i*pos+1, (uint8_t) (distance & 0xFF));
-        delay(2);
-
-        //radio.write(&distance, sizeof(distance));
+        ice.write16(2*i+800*(pos-10), distance);
+        radio.write(&distance, sizeof(distance));
 
         delay(25);
     }
@@ -70,11 +65,9 @@ void loop() {
     servo.write(pos);
 
     if (pos == 90) {
-        for (uint32_t i = 0; i < 36000L; i += 2) {
-            uint16_t dist0 = (uint16_t) (((uint16_t) ice.read(i)) << 8);
-            uint32_t dist1 = (uint16_t) ice.read(i+1);
-            //uint16_t distance = (uint16_t) (((uint16_t) ice.read(i)) << 8 | ice.read(i+1));
-            uint16_t distance = dist0 | dist1;
+        delay(15000);
+        for (uint32_t i = 0; i < 72000L; i += 2) {
+            uint16_t distance = ice.read16(i);
             radio.write(&distance, sizeof(distance));
             delay(2);
         }
