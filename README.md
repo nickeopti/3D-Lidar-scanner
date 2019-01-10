@@ -1,7 +1,7 @@
 # 3D-Lidar-scanner
 
 This repository contains the code, that runs on the rotating Atmega unit, in the 3D Lidar Scanner project.
-The code is setup to be developen upon in CLion, with automatic builds and uploads to the Atmega chip via PlatformIO
+The codebase is setup to be developed upon in CLion, with automatic builds and uploads to the Atmega chip via PlatformIO
 
 See also:
  - [The 3D Visualizer repository](https://github.com/nickeopti/3D_Lidar_Visualizer)
